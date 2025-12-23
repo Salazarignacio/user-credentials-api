@@ -2,24 +2,31 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import config.ConnectionDB;
 import entities.CredencialUsuario;
 import java.sql.Timestamp;
+import java.sql.ResultSet;
 
 public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
 
     @Override
     public void crear(CredencialUsuario entity) throws Exception {
         String sql = "INSERT INTO credencial_usuario (eliminado, hash_password, salt, ultimo_cambio, require_reset) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            //stmt.setLong(1, entity.getId());
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setBoolean(1, entity.getEliminado());
             stmt.setString(2, entity.getHashPassword());
             stmt.setString(3, entity.getSalt());
             stmt.setTimestamp(4, Timestamp.valueOf(entity.getUltimoCambio()));
             stmt.setBoolean(5, entity.getRequireReset());
-            int filasAfectadas = stmt.executeUpdate();
-            System.out.println(filasAfectadas);
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                Long idGenerado = rs.getLong(1);
+                entity.setId(idGenerado);
+            }
         }
     }
 

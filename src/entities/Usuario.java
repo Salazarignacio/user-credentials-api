@@ -12,8 +12,7 @@ public class Usuario {
     private LocalDateTime fechaRegistro;
     private final CredencialUsuario credencial;
 
-    public Usuario(Long id, String userName, String email, Boolean activo, LocalDateTime fechaRegistro, CredencialUsuario credencial) {
-        this.id = id;
+    public Usuario(String userName, String email, Boolean activo, LocalDateTime fechaRegistro, CredencialUsuario credencial) {
         this.eliminado = credencial.getEliminado();
         this.userName = userName;
         this.email = email;
@@ -24,6 +23,10 @@ public class Usuario {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Boolean getEliminado() {

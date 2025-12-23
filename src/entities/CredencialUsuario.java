@@ -11,8 +11,7 @@ public class CredencialUsuario {
     private LocalDateTime ultimoCambio;
     private Boolean requireReset;
 
-    public CredencialUsuario(Long id, Boolean eliminado, String hashPassword, String salt, LocalDateTime ultimoCambio, Boolean requireReset) {
-        this.id = id;
+    public CredencialUsuario(Boolean eliminado, String hashPassword, String salt, LocalDateTime ultimoCambio, Boolean requireReset) {
         this.eliminado = eliminado;
         this.hashPassword = hashPassword;
         this.salt = salt;
@@ -22,6 +21,10 @@ public class CredencialUsuario {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Boolean getEliminado() {

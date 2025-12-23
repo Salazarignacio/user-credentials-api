@@ -4,15 +4,19 @@ import entities.CredencialUsuario;
 import entities.Usuario;
 import java.time.LocalDateTime;
 import dao.CredencialUsuarioDAO;
+import dao.UsuarioDAO;
 
 public class UserCredentialsApi {
 
     public static void main(String[] args) throws Exception {
-        CredencialUsuario credencial1 = new CredencialUsuario(null, false, "hash", "salt", LocalDateTime.now(), false);
-        CredencialUsuario credencial2 = new CredencialUsuario(null, false, "hash2", "salt2", LocalDateTime.now(), false);
-        Usuario usuario1 = new Usuario(null, "Nacho", "ignaciosalazar986@gmail.com", true, LocalDateTime.now(), credencial1);
+        CredencialUsuario nuevaCredencial = new CredencialUsuario(false, "hash", "salt", LocalDateTime.now(), false);
+
+        Usuario nuevoUsuario = new Usuario("Nuevo usuario", "nuevousuario@gmail.com", true, LocalDateTime.now(), nuevaCredencial);
+
         CredencialUsuarioDAO credencialDAO = new CredencialUsuarioDAO();
-        credencialDAO.crear(credencial2);
+        credencialDAO.crear(nuevaCredencial);
+        UsuarioDAO usuario = new UsuarioDAO();
+        usuario.crear(nuevoUsuario);
     }
 
 }
