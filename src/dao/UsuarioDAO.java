@@ -10,16 +10,16 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     @Override
     public void crear(Usuario entity) throws Exception {
-        String sql = "INSERT INTO USUARIO (ID, ELIMINADO, USERNAME, EMAIL, ACTIVO, FECHA_REGISTRO, CREDENCIAL_ID) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO USUARIO (ID, ELIMINADO, HASH_PASSWORD, SALT, ULTIMO_CAMBIO, REQUIRE_RESET) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+            stmt.setLong(1, entity.getId());
             stmt.setBoolean(2, entity.getEliminado());
             stmt.setString(3, entity.getUserName());
             stmt.setString(4, entity.getEmail());
             stmt.setBoolean(5, entity.getActivo());
             stmt.setTimestamp(6, Timestamp.valueOf(entity.getFechaRegistro()));
-            stmt.setString(7, entity.getCredencialId());
+            stmt.setLong(7, entity.getCredencialId());
         }
     }
 
@@ -40,7 +40,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     @Override
     public void actualizar(Usuario entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

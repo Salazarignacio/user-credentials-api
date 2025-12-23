@@ -28,4 +28,20 @@ public class CredencialUsuario {
         return eliminado;
     }
 
+    public String getHashPassword() {
+        return hashPassword;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public LocalDateTime getUltimoCambio() {
+        return ultimoCambio;
+    }
+
+    public Boolean getRequireReset() {
+        return requireReset;
+    }
+
 }

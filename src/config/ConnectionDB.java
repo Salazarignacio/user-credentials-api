@@ -19,7 +19,8 @@ public class ConnectionDB {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (URL != null || URL.isEmpty() || USER != null || USER.isEmpty() || PASSWORD != null || PASSWORD.isEmpty()) {
+        if (URL == null || URL.isEmpty() || USER == null || USER.isEmpty() || PASSWORD == null || PASSWORD.isEmpty()) {
+
             throw new SQLException("Configuracion de la base de datos incompleta");
         }
         return DriverManager.getConnection(URL, USER, PASSWORD);
