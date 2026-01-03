@@ -35,6 +35,26 @@ public class CredencialUsuario {
         return hashPassword;
     }
 
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public void setUltimoCambio(LocalDateTime ultimoCambio) {
+        this.ultimoCambio = ultimoCambio;
+    }
+
+    public void setRequireReset(Boolean requireReset) {
+        this.requireReset = requireReset;
+    }
+
     public String getSalt() {
         return salt;
     }
