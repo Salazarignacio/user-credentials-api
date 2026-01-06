@@ -20,7 +20,11 @@ public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
             stmt.setString(3, entity.getSalt());
             stmt.setTimestamp(4, Timestamp.valueOf(entity.getUltimoCambio()));
             stmt.setBoolean(5, entity.getRequireReset());
-            stmt.executeUpdate();
+            int filasAfectadas = stmt.executeUpdate();
+
+            if (filasAfectadas == 0) {
+                throw new SQLException("No se pudo crear el usuario");
+            }
 
             ResultSet rs = stmt.getGeneratedKeys();
 
@@ -32,19 +36,21 @@ public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
     }
 
     @Override
-    public void leer(Integer id) throws Exception {
+    public void leer(Integer id) throws SQLException {
         String sql = "SELECT * FROM credencial_usuario WHERE ID = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 System.out.println("ID: " + rs.getLong("id") + " eliminado " + rs.getBoolean("eliminado") + " hash_password" + rs.getString("hash_password") + " salt " + rs.getString("salt") + " ultimo_cambio " + rs.getDate("ultimo_cambio") + " require_reset " + rs.getBoolean("require_reset"));
+            } else {
+                throw new SQLException("No se encontro ID");
             }
         }
     }
 
     @Override
-    public void leerTodos() throws Exception {
+    public void leerTodos() throws SQLException {
         String sql = "SELECT * FROM credencial_usuario";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -55,13 +61,13 @@ public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
     }
 
     @Override
-    public void eliminar(Integer id) throws Exception {
+    public void eliminar(Integer id) throws SQLException {
         String sql = "DELETE FROM credencial_usuario WHERE ID = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             int filasAfectadas = stmt.executeUpdate();
             if (filasAfectadas == 0) {
-                System.out.println("No se encontro ID");
+                throw new SQLException("No se encontro ID");
             } else {
                 System.out.println("ID eliminado correctamente");
             }

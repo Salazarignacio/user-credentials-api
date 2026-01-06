@@ -53,4 +53,24 @@ public class Usuario {
         return credencial.getId();
     }
 
+    public void setEliminado(Boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
 }
