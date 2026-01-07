@@ -11,6 +11,11 @@ public class CredencialUsuario {
     private LocalDateTime ultimoCambio;
     private Boolean requireReset;
 
+    public CredencialUsuario() {
+    }
+
+    ;
+
     public CredencialUsuario(Boolean eliminado, String hashPassword, String salt, LocalDateTime ultimoCambio, Boolean requireReset) {
         this.eliminado = eliminado;
         this.hashPassword = hashPassword;

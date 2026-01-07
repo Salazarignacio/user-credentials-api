@@ -1,12 +1,14 @@
 package dao;
 
+import java.util.List;
+
 public interface GenericDAO<T> {
 
     void crear(T entity) throws Exception;
 
-    void leer(Integer id) throws Exception;
+    T leer(Integer id) throws Exception;
 
-    void leerTodos() throws Exception;
+    List<T> leerTodos() throws Exception;
 
     void actualizar(T entity) throws Exception;
 

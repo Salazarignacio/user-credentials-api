@@ -8,6 +8,7 @@ import entities.CredencialUsuario;
 import java.sql.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
 
@@ -36,13 +37,15 @@ public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
     }
 
     @Override
-    public void leer(Integer id) throws SQLException {
+    public CredencialUsuario leer(Integer id) throws SQLException {
         String sql = "SELECT * FROM credencial_usuario WHERE ID = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                System.out.println("ID: " + rs.getLong("id") + " eliminado " + rs.getBoolean("eliminado") + " hash_password" + rs.getString("hash_password") + " salt " + rs.getString("salt") + " ultimo_cambio " + rs.getDate("ultimo_cambio") + " require_reset " + rs.getBoolean("require_reset"));
+                CredencialUsuario credencial = new CredencialUsuario(rs.getBoolean("eliminado"), rs.getString("hash_password"), rs.getString("salt"), rs.getTimestamp("ultimo_cambio").toLocalDateTime(), rs.getBoolean("require_reset"));
+                credencial.setId(rs.getLong("id")); // o 1
+                return credencial;
             } else {
                 throw new SQLException("No se encontro ID");
             }
@@ -50,13 +53,17 @@ public class CredencialUsuarioDAO implements GenericDAO<CredencialUsuario> {
     }
 
     @Override
-    public void leerTodos() throws SQLException {
+    public ArrayList<CredencialUsuario> leerTodos() throws SQLException {
         String sql = "SELECT * FROM credencial_usuario";
+        ArrayList<CredencialUsuario> credenciales = new ArrayList();
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("ID: " + rs.getLong("id") + " eliminado " + rs.getBoolean("eliminado") + " hash_password" + rs.getString("hash_password") + " salt " + rs.getString("salt") + " ultimo_cambio " + rs.getDate("ultimo_cambio") + " require_reset " + rs.getBoolean("require_reset"));
+                CredencialUsuario credencial = new CredencialUsuario(rs.getBoolean("eliminado"), rs.getString("hash_password"), rs.getString("salt"), rs.getTimestamp("ultimo_cambio").toLocalDateTime(), rs.getBoolean("require_reset"));
+                credencial.setId(rs.getLong("id"));
+                credenciales.add(credencial);
             }
+            return credenciales;
         }
     }
 

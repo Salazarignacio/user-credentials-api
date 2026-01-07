@@ -25,6 +25,12 @@ public class Usuario {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", eliminado=" + eliminado + ", userName=" + userName + ", email=" + email + ", activo=" + activo + ", fechaRegistro=" + fechaRegistro + ", credencial=" + credencial + '}';
+    }
+    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -51,6 +57,9 @@ public class Usuario {
 
     public Long getCredencialId() {
         return credencial.getId();
+    }
+    public void setCredencialId(Long id) {
+        this.credencial.setId(id);
     }
 
     public void setEliminado(Boolean eliminado) {

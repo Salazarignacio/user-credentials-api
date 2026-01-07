@@ -1,6 +1,7 @@
 package dao;
 
 import config.ConnectionDB;
+import entities.CredencialUsuario;
 import entities.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class UsuarioDAO implements GenericDAO<Usuario> {
 
@@ -41,13 +44,18 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public void leer(Integer id) throws Exception {
+    public Usuario leer(Integer id) throws Exception {
         String sql = "SELECT * FROM USUARIO WHERE ID = ?";
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                System.out.println("ID: " + rs.getLong("id") + " Eliminado: " + rs.getBoolean("eliminado") + " Usuario " + rs.getString("username") + " Activo " + rs.getBoolean("activo") + " Registro " + rs.getDate("fecha_registro") + " Credencial ID " + rs.getLong("credencial_id"));
+                // Hay que dar explicaciones de lo que se hizo aca y ver si es viable 
+                CredencialUsuario credencial = new CredencialUsuario();
+                Usuario usuario = new Usuario(rs.getString("username"), rs.getString("email"), rs.getBoolean("activo"), rs.getTimestamp("fecha_registro").toLocalDateTime(), credencial);
+                usuario.setId(rs.getLong("id"));
+                usuario.setCredencialId(rs.getLong("credencial_id"));
+                return usuario;
             } else {
                 throw new SQLException("No se encontro ID");
             }
@@ -55,14 +63,18 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     }
 
     @Override
-    public void leerTodos() throws Exception {
+    public ArrayList<Usuario> leerTodos() throws Exception {
         String sql = "SELECT * FROM USUARIO";
+        ArrayList<Usuario> usuarios = new ArrayList();
         try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getLong("id") + " Eliminado: " + rs.getBoolean("eliminado") + " Usuario " + rs.getString("username") + " Activo " + rs.getBoolean("activo") + " Registro " + rs.getDate("fecha_registro") + " Credencial ID " + rs.getLong("credencial_id"));
+                CredencialUsuario credencial = new CredencialUsuario();
+                Usuario usuario = new Usuario(rs.getString("username"), rs.getString("email"), rs.getBoolean("activo"), rs.getTimestamp("fecha_registro").toLocalDateTime(), credencial);
+                usuarios.add(usuario);
             }
+            return usuarios;
         }
     }
 
