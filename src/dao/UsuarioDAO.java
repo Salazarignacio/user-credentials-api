@@ -38,7 +38,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 entity.setId(idGenerado);
             }
 
-            stmt.executeUpdate();
+            //stmt.executeUpdate();
 
         }
     }

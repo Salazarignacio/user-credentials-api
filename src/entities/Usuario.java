@@ -56,7 +56,7 @@ public class Usuario {
     }
 
     public Long getCredencialId() {
-        return credencial.getId();
+        return this.credencial.getId();
     }
     public void setCredencialId(Long id) {
         this.credencial.setId(id);
