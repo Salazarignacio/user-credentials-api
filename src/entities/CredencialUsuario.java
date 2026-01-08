@@ -72,4 +72,9 @@ public class CredencialUsuario {
         return requireReset;
     }
 
+    @Override
+    public String toString() {
+        return "CredencialUsuario{" + "id=" + id + ", eliminado=" + eliminado + ", hashPassword=" + hashPassword + ", salt=" + salt + ", ultimoCambio=" + ultimoCambio + ", requireReset=" + requireReset + '}';
+    }
+
 }
