@@ -28,12 +28,12 @@ public class ProductoService implements GenericService<Producto> {
 
     @Override
     public Producto findById(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return productoDAO.leer(id);
     }
 
     @Override
     public List findAll() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return productoDAO.leerTodos();
     }
 
     @Override

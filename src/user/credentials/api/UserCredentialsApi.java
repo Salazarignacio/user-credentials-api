@@ -14,13 +14,15 @@ import service.UsuarioService;
 public class UserCredentialsApi {
 
     public static void main(String[] args) throws Exception {
-        Producto p1 = new Producto(1, "Coca Cola", "gaseosas", 3500, 300);
+        Producto p1 = new Producto("Coca Cola", "gaseosas", 3500, 300, 3);
         ProductoDAO pDAO = new ProductoDAO();
         ProductoService pService = new ProductoService(pDAO);
-        pService.save(p1);
+        //  pService.save(p1);
+        //  pService.findAll();
+        //  pService.findById(1);
+
         //  CredencialUsuario nuevaCredencial = new CredencialUsuario(false, "hashNuevo", "salt", LocalDateTime.now(), false);
         //  Usuario nuevoUsuario = new Usuario("usuario6", "usuario6@gmail.com", true, LocalDateTime.now(), nuevaCredencial);
-
         //  CredencialUsuarioDAO credencialDAO = new CredencialUsuarioDAO();
         //  CredencialService credencialService = new CredencialService(credencialDAO);
         // CredencialUsuario Services
@@ -31,7 +33,6 @@ public class UserCredentialsApi {
         //  credencialService.save(nuevaCredencial);
         //  nuevaCredencial.setHashPassword("Editado 10:35");
         //  credencialService.update(nuevaCredencial);
-
         // CredencialUsuario DAO
         //  credencialDAO.crear(nuevaCredencial);
         //  nuevaCredencial.setHashPassword("Editado");
@@ -40,7 +41,6 @@ public class UserCredentialsApi {
         //  credencialDAO.eliminar(9);
         //  nuevaCredencial.setHashPassword("testeando hash");
         //  credencialDAO.actualizar(nuevaCredencial);
-        
         // UsuarioDAO
         //  UsuarioDAO usuarioDAO = new UsuarioDAO();
         //  usuarioDAO.crear(nuevoUsuario);
@@ -49,7 +49,6 @@ public class UserCredentialsApi {
         //  usuarioDAO.eliminar(8); 
         //  nuevoUsuario.setUserName("nombre editado");
         //  usuarioDAO.actualizar(nuevoUsuario);
-        
         // UsuarioService
         //  UsuarioService uService = new UsuarioService(usuarioDAO);
         //  uService.save(nuevoUsuario);
