@@ -1,21 +1,23 @@
-# user-credentials-api
 🧩 Descripción del proyecto
 
-Este proyecto consiste en el desarrollo de una aplicación backend en Java, creada con NetBeans, que implementa un CRUD (Create, Read, Update, Delete) de usuarios y sus credenciales, utilizando MySQL como base de datos.
+Este proyecto consiste en el desarrollo de una aplicación backend en Java orientada a la gestión y cobro de productos en un negocio.
+La aplicación está diseñada para administrar productos, controlar stock y manejar precios, sirviendo como base para un sistema de ventas simple y escalable.
 
-El objetivo principal es construir una solución clara y bien estructurada que sirva como proyecto de portfolio, demostrando conocimientos en programación orientada a objetos, acceso a datos y diseño de aplicaciones backend.
+El backend está desarrollado con una arquitectura clara y modular, preparada para ser consumida por un frontend independiente (web o desktop).
 
 🎯 Objetivos
 
-Implementar un CRUD completo de usuarios y credenciales
+Gestionar productos de un negocio
 
-Aplicar principios de POO y buenas prácticas de diseño
+Administrar precios y stock
 
-Trabajar con persistencia de datos en MySQL
+Proveer operaciones CRUD sobre productos
 
-Manejar conexiones a base de datos mediante JDBC
+Persistir información en una base de datos relacional
 
-Separar responsabilidades entre capas (modelo, acceso a datos, lógica)
+Mantener una arquitectura clara y separada por capas
+
+Facilitar futuras extensiones como ventas, facturación o reportes
 
 🛠️ Tecnologías utilizadas
 
@@ -33,10 +35,17 @@ SQL
 
 Programación Orientada a Objetos
 
-Relaciones entre entidades (Usuario → Credencial)
+Arquitectura en capas
 
-Acceso y manejo de bases de datos
+Patrón DAO
+
+Acceso a bases de datos con JDBC
 
 Manejo de excepciones
 
-Buenas prácticas de código y estructura de proyecto
+Buenas prácticas de diseño y organización de código
+
+📌 Estado del proyecto
+
+Aplicación en desarrollo.
+Actualmente se encuentra implementada la estructura base del backend y el modelo de datos para la gestión de productos.
