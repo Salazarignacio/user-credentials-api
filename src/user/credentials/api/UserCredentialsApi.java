@@ -4,22 +4,29 @@ import entities.CredencialUsuario;
 import entities.Usuario;
 import java.time.LocalDateTime;
 import dao.CredencialUsuarioDAO;
+import dao.ProductoDAO;
 import dao.UsuarioDAO;
+import entities.Producto;
 import service.CredencialService;
+import service.ProductoService;
 import service.UsuarioService;
 
 public class UserCredentialsApi {
 
     public static void main(String[] args) throws Exception {
-        CredencialUsuario nuevaCredencial = new CredencialUsuario(false, "hashNuevo", "salt", LocalDateTime.now(), false);
-        Usuario nuevoUsuario = new Usuario("usuario6", "usuario6@gmail.com", true, LocalDateTime.now(), nuevaCredencial);
+        Producto p1 = new Producto(1, "Coca Cola", "gaseosas", 3500, 300);
+        ProductoDAO pDAO = new ProductoDAO();
+        ProductoService pService = new ProductoService(pDAO);
+        pService.save(p1);
+        //  CredencialUsuario nuevaCredencial = new CredencialUsuario(false, "hashNuevo", "salt", LocalDateTime.now(), false);
+        //  Usuario nuevoUsuario = new Usuario("usuario6", "usuario6@gmail.com", true, LocalDateTime.now(), nuevaCredencial);
 
-        CredencialUsuarioDAO credencialDAO = new CredencialUsuarioDAO();
-        CredencialService credencialService = new CredencialService(credencialDAO);
+        //  CredencialUsuarioDAO credencialDAO = new CredencialUsuarioDAO();
+        //  CredencialService credencialService = new CredencialService(credencialDAO);
         // CredencialUsuario Services
         //  System.out.println(credencialService.findById(1));
         //  System.out.println(credencialService.findAll());
-          credencialService.save(nuevaCredencial);
+        //  credencialService.save(nuevaCredencial);
         //  credencialService.delete(45); 
         //  credencialService.save(nuevaCredencial);
         //  nuevaCredencial.setHashPassword("Editado 10:35");
@@ -35,7 +42,7 @@ public class UserCredentialsApi {
         //  credencialDAO.actualizar(nuevaCredencial);
         
         // UsuarioDAO
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        //  UsuarioDAO usuarioDAO = new UsuarioDAO();
         //  usuarioDAO.crear(nuevoUsuario);
         //  System.out.println(usuarioDAO.leerTodos());
         //  System.out.println(usuarioDAO.leer(1));
