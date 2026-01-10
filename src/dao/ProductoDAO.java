@@ -69,13 +69,36 @@ public class ProductoDAO implements GenericDAO<Producto> {
     }
 
     @Override
-    public void actualizar(Producto entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizar(Producto entity) throws SQLException {
+        String sql = "UPDATE Producto "
+                + "SET articulo = ?, categoria = ?, precio = ?, stock = ?, codigo = ? "
+                + "WHERE id = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, entity.getArticulo());
+            stmt.setString(2, entity.getCategoria());
+            stmt.setDouble(3, entity.getPrecio());
+            stmt.setInt(4, entity.getStock());
+            stmt.setInt(5, entity.getCodigo());
+            stmt.setLong(6, entity.getId());
+            int filasAfectadas = stmt.executeUpdate();
+            if (filasAfectadas == 0) {
+                throw new SQLException("ID no encontrado");
+            }
+        }
     }
 
     @Override
-    public void eliminar(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eliminar(Integer id) throws SQLException {
+        String sql = "DELETE FROM Producto WHERE ID = ?";
+        try (Connection conn = ConnectionDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            int filasAfectadas = stmt.executeUpdate();
+            if (filasAfectadas == 0) {
+                throw new SQLException("ID no encontrado");
+            } else {
+                System.out.println("ID eliminado correctamente");
+            }
+        }
     }
 
 }

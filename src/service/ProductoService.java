@@ -38,12 +38,12 @@ public class ProductoService implements GenericService<Producto> {
 
     @Override
     public void delete(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        productoDAO.eliminar(id);
     }
 
     @Override
     public void update(Producto entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        productoDAO.actualizar(entity);
     }
 
 }
